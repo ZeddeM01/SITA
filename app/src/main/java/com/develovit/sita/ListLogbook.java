@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import com.develovit.sita.Adapter.LogbookAdapter;
 import com.develovit.sita.Models.Logbook;
 
-public class ListLogbookActivity extends AppCompatActivity {
+public class ListLogbook extends AppCompatActivity {
 
     private RecyclerView rvLog;
 

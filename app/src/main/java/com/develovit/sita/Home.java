@@ -94,4 +94,9 @@ public class Home extends AppCompatActivity {
         startActivity(ta0);
     }
 
+    public  void  test(View view){
+        Intent test = new Intent(this, testing.class);
+        startActivity(test);
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.develovit.sita;
-/*
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -20,80 +20,68 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+    private static final String CHANNEL_ID = "test_channel" ;
+    private static final String TAG = "Service-Debug";
+    private NotificationManagerCompat notificationManager;
 
-    public class MyFirebaseMessagingService extends FirebaseMessagingService {
-        private static final String CHANNEL_ID = "Test_kanal";
-        private static final String TAG = "Service-Debug";
-        private NotificationManagerCompat notificationManager;
-        @Override
-        public void onNewToken(@NonNull String token) {
-            Log.d(TAG, "Refreshed token: " + token);
-        }
-        @Override
-        public void onMessageReceived(RemoteMessage remoteMessage) {
-            String tipe = remoteMessage.getData().get("tipe");
-            if (tipe.equals("1"))
-                displayNotification(remoteMessage.getNotification());
-            else
-                displayNotification2(remoteMessage.getNotification());
-
-
-            displayNotification(remoteMessage.getNotification());
-        }
-
-        private void displayNotification(RemoteMessage.Notification notification) {
-            @@ -44,14 +49,44 @@ private void displayNotification(RemoteMessage.Notification notification) {
-                channel.setDescription(description);
-                NotificationManagerCompat.from(this).createNotificationChannel(channel);
-            }
-            NotificationCompat.Builder builder = null;
-
-
-            // 3. Membuat builder untuk membuat notifikasi
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.backbtn)
-            //Tipe notif 1
-            Intent resultIntent = new Intent(this, Seminarlist.class);
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-            stackBuilder.addNextIntentWithParentStack(resultIntent);
-            PendingIntent resultPendingIntent =
-                    stackBuilder.getPendingIntent(0,
-                            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-            builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.backbtn)
-                    .setContentTitle(notification.getTitle())
-                    .setContentText(notification.getBody())
-                    .setContentIntent(resultPendingIntent)
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-            // 4. Membuat objek notifikasi dan menampilkan notifikasi
-            NotificationManagerCompat.from(this).notify(1304, builder.build());
-
-            //Toast.makeText(notif_salma.this, "Test", Toast.LENGTH_SHORT).show();
-        }
-        private void displayNotification2(RemoteMessage.Notification notification) {
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                CharSequence name = "Contoh notifikasi";
-                String description = "cuman notif aja";
-                int importance = NotificationManager.IMPORTANCE_DEFAULT;
-                NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-                channel.setDescription(description);
-                NotificationManagerCompat.from(this).createNotificationChannel(channel);
-            }
-            NotificationCompat.Builder builder = null;
-
-            //Tipe notif 2
-            builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.backbtn)
-                    .setContentTitle(notification.getTitle())
-                    .setContentText(notification.getBody())
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-            // 4. Membuat objek notifikasi dan menampilkan notifikasi
-            NotificationManagerCompat.from(this).notify(1304, builder.build());
-
-        }
+    @Override
+    public void onNewToken(@NonNull String token) {
+        Log.d(TAG, "Refreshed token: " + token);
     }
 
-*/
+    @Override
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+        String tipe = remoteMessage.getData().get("tipe");
+        if (tipe.equals("1"))
+            displayNotification(remoteMessage.getNotification()); // Notifikasi ada intent
+        else
+            displayNotification2(remoteMessage.getNotification()); // Notifikasi tidak ada intent
+    }
+
+    // A. TIPE NOTIFIKASI 1 (ada intent)
+    private void displayNotification(RemoteMessage.Notification notification) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Channel Contoh", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Ini hanya channel untuk contoh notifikasi");
+            NotificationManagerCompat.from(this).createNotificationChannel(channel);
+        }
+        NotificationCompat.Builder builder = null;
+
+        Intent resultIntent = new Intent(this, Home.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntentWithParentStack(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.warning)
+                .setContentTitle(notification.getTitle())
+                .setContentText(notification.getBody())
+                .setContentIntent(resultPendingIntent)
+//                .addAction(R.drawable.ic_baseline_warning_24, "PERGI", resultPendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        // Tampilkan notifikasi
+        NotificationManagerCompat.from(this).notify(101, builder.build());
+    }
+
+    // B. TIPE NOTIFIKASI 2 (tidak ada intent)
+    private void displayNotification2(RemoteMessage.Notification notification) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Channel Contoh", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Ini hanya channel untuk contoh notifikasi");
+            NotificationManagerCompat.from(this).createNotificationChannel(channel);
+        }
+        NotificationCompat.Builder builder = null;
+
+        builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.warning)
+                .setContentTitle(notification.getTitle())
+                .setContentText(notification.getBody())
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        // Tampilkan notifikasi
+        NotificationManagerCompat.from(this).notify(101, builder.build());
+    }
+}

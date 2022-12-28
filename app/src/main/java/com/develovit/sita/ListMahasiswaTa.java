@@ -6,14 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import java.util.ArrayList;
 
 import com.develovit.sita.Adapter.MhsCardAdapter;
 import com.develovit.sita.Models.ListMhsTa;
 
-public class ListMahasiswaTaActivity extends AppCompatActivity implements MhsCardAdapter.listMhsOnClickListener{
+public class ListMahasiswaTa extends AppCompatActivity implements MhsCardAdapter.listMhsOnClickListener{
 
     private RecyclerView rview;
 
@@ -99,7 +98,7 @@ public class ListMahasiswaTaActivity extends AppCompatActivity implements MhsCar
 
     @Override
     public void listMhsClick(ArrayList<ListMhsTa> listAgenda) {
-        Intent logbook = new Intent(this, ListLogbookActivity.class);
+        Intent logbook = new Intent(this, ListLogbook.class);
         //logbook.putExtra("LIST LOGBOOK",listAgenda.getNamaMhs());
         startActivity(logbook);
     }

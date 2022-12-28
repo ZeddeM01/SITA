@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "938008741773",
-    "project_id": "sita-a68f3",
-    "storage_bucket": "sita-a68f3.appspot.com"
+    "project_number": "411685435821",
+    "project_id": "sita-9da0a",
+    "storage_bucket": "sita-9da0a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:938008741773:android:922e603ac8af8708899fc4",
+        "mobilesdk_app_id": "1:411685435821:android:8d5202bc59f02fdf444924",
         "android_client_info": {
           "package_name": "com.develovit.sita"
         }
       },
       "oauth_client": [
         {
-          "client_id": "938008741773-8b6ek3upbrrsofi1og11eb8htj4i1rc3.apps.googleusercontent.com",
+          "client_id": "411685435821-1i4voa43in9a5s3a917asdept40csr8v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB3Q-lW2ZWQTtNfhqfhd3K4h2ybbICJL4E"
+          "current_key": "AIzaSyAT9fYWKeD8rcJTPfL3hX1Q7549Qsu31xs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "938008741773-8b6ek3upbrrsofi1og11eb8htj4i1rc3.apps.googleusercontent.com",
+              "client_id": "411685435821-1i4voa43in9a5s3a917asdept40csr8v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
